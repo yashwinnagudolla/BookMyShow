@@ -21,7 +21,7 @@ public class TicketServiceImpl implements TicketService{
     private TicketRepository ticketRepository;
     private ShowRepository showRepository;
     @Override
-    public Ticket bookTicket(Long userId, @NotNull List<Long> showSeatIds, Long showId){
+    public Ticket bookTicket(Long userId, List<Long> showSeatIds, Long showId){
         User user = userRepository.findById(userId).get();
         Show show = showRepository.findById(showId).get();
         for(Long showSeatId: showSeatIds){
