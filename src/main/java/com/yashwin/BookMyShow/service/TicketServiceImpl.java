@@ -9,18 +9,28 @@ import com.yashwin.BookMyShow.repository.ShowSeatRepository;
 import com.yashwin.BookMyShow.repository.TicketRepository;
 import com.yashwin.BookMyShow.repository.UserRepository;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class TicketServiceImpl implements TicketService{
+    @Autowired
     private UserRepository userRepository;
+    @Autowired
     private ShowSeatRepository showSeatRepository;
+    @Autowired
     private TicketRepository ticketRepository;
+    @Autowired
     private ShowRepository showRepository;
     @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public Ticket bookTicket(Long userId, List<Long> showSeatIds, Long showId){
         User user = userRepository.findById(userId).get();
         Show show = showRepository.findById(showId).get();

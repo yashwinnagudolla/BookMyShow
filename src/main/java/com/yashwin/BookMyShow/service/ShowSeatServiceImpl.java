@@ -4,12 +4,15 @@ import com.yashwin.BookMyShow.exception.ShowSeatNotAvailableException;
 import com.yashwin.BookMyShow.models.ShowSeat;
 import com.yashwin.BookMyShow.models.ShowSeatStatus;
 import com.yashwin.BookMyShow.repository.ShowSeatRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class ShowSeatServiceImpl implements ShowSeatService{
+    @Autowired
     private ShowSeatRepository showSeatRepository;
     public ShowSeat getShowSeat(Long showSeatId){
         Optional<ShowSeat> showSeatOptional = showSeatRepository.findById(showSeatId);
