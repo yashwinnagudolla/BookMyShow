@@ -11,19 +11,29 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
     @Autowired
-    private UserService userService;
+    private UserService userService; // interface
 
     public UserSignupResponseDTO signUp(UserSignUpRequestDTO userSignUpRequestDTO){
         User user;
-        UserSignupResponseDTO userSignupResponseDTO = new UserSignupResponseDTO();
+        UserSignupResponseDTO responseDTO = new UserSignupResponseDTO();
         try{
-
-
-        }catch(Exception e){
-
+            UserControllerUtil.validateUserSignUPRequestDTO(userSignUpRequestDTO);
+            user = userService.signUp(userSignUpRequestDTO.getName(), userSignUpRequestDTO.getEmail(), userSignUpRequestDTO.getPassword());
+            // method that converts internal models into DTOs
+            responseDTO.setId(user.getId());
+            responseDTO.setName(user.getName());
+            responseDTO.setEmail(user.getEmail());
+            responseDTO.setTickets(user.getTickets());
+            responseDTO.setResponseCode(200);
+            responseDTO.setResponseMessage("SUCCESS");
+            return responseDTO;
+        } catch (Exception e){
+            responseDTO.setResponseCode(500);
+            responseDTO.setResponseMessage("Internal Server Error");
+            return responseDTO;
         }
-
     }
+}
 
 
 }
