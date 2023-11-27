@@ -17,7 +17,7 @@ public class UserController {
         User user;
         UserSignupResponseDTO responseDTO = new UserSignupResponseDTO();
         try{
-            UserControllerUtil.validateUserSignUPRequestDTO(userSignUpRequestDTO);
+            //UserControllerUtil.validateUserSignUPRequestDTO(userSignUpRequestDTO);
             user = userService.signUp(userSignUpRequestDTO.getName(), userSignUpRequestDTO.getEmail(), userSignUpRequestDTO.getPassword());
             // method that converts internal models into DTOs
             responseDTO.setId(user.getId());
